@@ -12,11 +12,11 @@ cp .env.example .env
 
 ### Щоб встановити необхідні бібліотеки виконуємо команду для докера
 
-```docker run --rm -it \
+docker run --rm -it \
     -v $(pwd):/var/www/html \
     -w /var/www/html \
     laravelsail/php83-composer:latest \
-    composer install```
+    composer install
 
 ### Після установки бібліотек можемо запускати сам образ
 
