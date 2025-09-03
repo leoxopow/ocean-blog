@@ -9,7 +9,8 @@ use App\Http\Controllers\UsersController;
 
 Route::apiResource('categories', CategoriesController::class)->only(['index', 'show']);
 Route::apiResource('categories.posts', PostsController::class)->only(['index']);
-Route::apiResource('posts', PostsController::class)->only(['index', 'show']);
+Route::apiResource('posts', PostsController::class)->only(['show']);
+Route::get('posts', [PostsController::class,'list'])->name('posts.list');
 Route::apiResource('posts.comments', CommentsController::class)->only(['index', 'show']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('categories', CategoriesController::class)->only(['store', 'update', 'destroy']);

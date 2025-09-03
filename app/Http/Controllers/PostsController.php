@@ -52,6 +52,29 @@ class PostsController extends Controller
         $posts = $this->category->posts()->latest()->paginate(1);
         return response()->json($posts);
     }
+    /**
+     * @OA\Get(
+     *     path="/posts",
+     *     summary="Отримати список постів",
+     *     tags={"Posts"},
+     *     @OA\Parameter(
+     *         name="search",
+     *         in="query",
+     *         description="Пошуковий запит",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="OK",
+     *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Post"))
+     *     )
+     * )
+     */
+    public function list(Request $request)
+    {
+        $posts = Post::where('title', 'like', '%'.$request->query('search').'%')->latest()->paginate(10);
+        return response()->json($posts);
+    }
 
     /**
      * @OA\Post(
